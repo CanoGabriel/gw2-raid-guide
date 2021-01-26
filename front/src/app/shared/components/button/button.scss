@@ -1,0 +1,52 @@
+@import "../../style/color.scss";
+
+.button {
+	// Couleur de thème, couleur de premier plan te couleur de survol
+	--btn-color: #{$primary-blue};
+	--front-color: #{$white};
+	--hover-color: #{$primary-blue-hover};
+
+	// Couleurs des différents éléments du bouton
+	--btn-text-color: var(--front-color);
+	--btn-bg-color: var(--btn-color);
+	--btn-border-color: var(--btn-color);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--btn-text-color);
+	background: var(--btn-bg-color);
+	border: 1px solid var(--btn-border-color);
+	border-radius: 5px;
+	cursor: pointer;
+	appearance: none;
+	padding: 5px 20px;
+
+	&:hover {
+		--btn-bg-color: var(--hover-color);
+		--btn-border-color: var(--hover-color);
+	}
+
+	&:disabled {
+		--btn-color: #{$grey-disable-bg};
+		--front-color: #{$grey-disable-fg};
+		--hover-color: #{$grey-disable-bg};
+		cursor: default;
+	}
+}
+
+.button--outline {
+	--btn-text-color: var(--btn-color);
+	--btn-bg-color: transparent;
+	--btn-border-color: var(--btn-color);
+	--hover-color: #{$light-blue-hover};
+
+	&:hover {
+		--btn-bg-color: var(--hover-color);
+		--btn-border-color: var(--btn-color);
+	}
+
+	&:disabled {
+		--hover-color: white;
+	}
+}

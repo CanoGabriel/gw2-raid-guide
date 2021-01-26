@@ -1,0 +1,30 @@
+@import "../../../../shared/style/size.scss";
+@import "../../../../shared/style/color.scss";
+
+.form-edit-section {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: $default-frame-shadow;
+  background-color: $white;
+}
+
+.form-edit-section__title {
+  font-size: $font-size-title;
+  align-self: center;
+}
+
+.form-edit-section__form {
+  display: flex;
+  flex-direction: column;
+  
+  .form__text-field {
+    padding-bottom: 10px
+  }
+}
+
+.form-edit-section__save {
+  align-self: flex-end;
+  margin-top: 5px;
+}

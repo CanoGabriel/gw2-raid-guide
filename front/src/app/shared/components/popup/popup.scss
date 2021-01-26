@@ -1,0 +1,9 @@
+@import "../../style/color.scss";
+
+.popup {
+  position: absolute;
+  margin: 30px 200px;
+  background-color: $white;
+  max-width: 600px;
+  align-self: center;
+}

@@ -1,0 +1,20 @@
+.form-edit-section-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-edit-section-link__form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  
+  .form__text-field {
+    padding-bottom: 10px
+  }
+}
+
+.form-edit-section-link__save {
+  align-self: flex-end;
+  margin-top: 5px;
+}

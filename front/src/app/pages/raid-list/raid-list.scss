@@ -1,0 +1,22 @@
+.raid-list-page{
+    display: flex;
+    flex-direction: column;
+}
+
+.raid-list-page__title {
+    font-size: 5rem;
+}
+
+.raid__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr 1fr;
+    gap: 20px;
+    margin: 10px;
+}
+
+.raid__item {
+    font-size: 3rem;
+    border-radius: 5px;
+    padding: 20px;
+}

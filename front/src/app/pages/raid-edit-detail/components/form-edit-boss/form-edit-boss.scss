@@ -1,0 +1,31 @@
+.form-edit-boss {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-edit-boss__form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+
+  .form__text-field:not(:last-child) {
+    padding-bottom: 10px
+  }
+}
+
+.form-edit-boss__section-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form-edit-boss__section-item {
+  margin: 20px;
+  flex-grow: 1;
+}
+
+.form-edit-boss__save{
+  align-self: flex-end;
+  margin-top: 5px;
+}

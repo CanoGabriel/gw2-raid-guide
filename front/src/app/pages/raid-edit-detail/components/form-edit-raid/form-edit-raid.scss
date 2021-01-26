@@ -1,0 +1,18 @@
+.form-edit-raid {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-edit-raid__form {
+  display: flex;
+  flex-direction: column;
+
+  .form__text-field {
+    padding-bottom: 10px;
+  }
+}
+
+.form-edit-raid__save {
+  align-self: flex-end;
+  margin-top: 5px;
+}

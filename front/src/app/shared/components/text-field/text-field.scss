@@ -1,0 +1,88 @@
+@import "../../../shared/style/size.scss";
+@import "../../../shared/style/color.scss";
+
+$red: red;
+
+.text-field {
+	position: relative;
+	display: inline-block;
+	--font-size-label: #{$font-size-xs};
+	--font-size-field: #{$font-size-l};
+	--border-color: black;
+}
+
+.text-field__input--valid {
+	// --border-color: #{$dark-blue};
+}
+
+.text-field--invalid {
+	--border-color: #{$red};
+
+	.text-field__input:focus + .text-field__label, .text-field__input--valid + .text-field__label, .text-field__label, .text-field__helper-text {
+		color: $red;
+	}
+}
+
+.text-field--disabled {
+	--border-color: #{$dark-grey};
+
+	.text-field__input {
+		color: $dark-grey;
+	}
+
+	.text-field__label {
+		color: $dark-grey;
+	}
+
+	.text-field__input--valid {
+		--border-color: #{$dark-grey};
+	}
+}
+
+.text-field__input {
+	border: none;
+	outline: 0;
+	background-color: inherit;
+	padding: 5px 0;
+	border-bottom: 1px solid var(--border-color);
+	margin-top: var(--font-size-label);
+	font-size: var(--font-size-field);
+	box-sizing: content-box;
+	height: 1em;
+	width: 100%;
+}
+
+.text-field__input::placeholder {
+	color: transparent;
+}
+
+.text-field__input:focus::placeholder {
+	color: $dark-grey;
+}
+
+.text-field__label {
+	position: absolute;
+	top: calc(5px + var(--font-size-label));
+	left: 0;
+	transition: .2s;
+	font-size: var(--font-size-field);
+	background-color: transparent;
+}
+
+.text-field__input:focus + .text-field__label, .text-field__input--valid + .text-field__label  {
+	top: calc(var(--font-size-label) * -1);
+	margin-top: var(--font-size-label);
+	font-size: var(--font-size-label);
+	color: $dark-grey;
+}
+
+.text-field__helper-text {
+	line-height: 1.5em;
+	display: block;
+	color: $dark-grey;
+}
+
+.text-field__icon{
+	--icon-size: 15px;
+	width: 20px;
+}

@@ -1,0 +1,16 @@
+@import "../../../../style/color.scss"; 
+@import "../../../../style/size.scss";
+
+.popup-portal {
+  position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+  left: 0;
+  background-color: $transparent-overlay-black;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: $z-popup;
+}

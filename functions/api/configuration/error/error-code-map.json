@@ -1,0 +1,26 @@
+{
+	"unauthorized": {
+		"httpCode": 401,
+		"logMessage": "Unauthorized"
+	},
+	"bad_request": {
+		"httpCode": 400,
+		"logMessage": "Bad request"
+	},
+	"forbidden": {
+		"httpCode": 403,
+		"logMessage": "Forbidden"
+	},
+	"not_found": {
+		"httpCode": 404,
+		"logMessage": "Entity not found"
+	},
+	"internal_server_error": {
+		"httpCode": 500,
+		"logMessage": "Internal server error"
+	},
+	"UNKNOWN": {
+		"httpCode": 500,
+		"logMessage": "Unknown error"
+	}
+}
