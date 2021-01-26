@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import classnames from "classnames/dedupe";
-import { AuthContext } from "../auth-context/auth-context";
+import { AuthContext } from "../../../domains/user/components/auth-context/auth-context";
 
 const Header = (props) => {
   const { className } = props;
-  const { handleSignOut, isSignedIn } = useContext(AuthContext);
+  const { handleLogout, isSignedIn } = useContext(AuthContext);
   return (
     <header className={classnames("header", className)}>
-      {isSignedIn && <button type="button" onClick={handleSignOut}>Deconnexion</button>}
+      {isSignedIn && <button type="button" onClick={handleLogout}>Deconnexion</button>}
       <Link to="/">Liste des Raid</Link>
     </header>
   );

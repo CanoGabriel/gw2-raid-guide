@@ -33,16 +33,16 @@ const errorHandler = (err, req, res, next) => {
     // Send response
     res.status(httpCode);
 
-    const result = { id, error: httpMessageMap[`${httpCode}`] };
+    const result = { uid: id, message: httpMessageMap[`${httpCode}`] };
     if (err.frontErrorId) {
-      result.errorId = err.frontErrorId;
+      result.error = err.frontErrorId;
     }
 
     res.send(result);
   } else {
     logger.error(`[${id}] - ${err.stack}`);
     const { httpCode } = errorCodeMap.UNKNOWN;
-    res.status(httpCode).send({ id, error: httpMessageMap[`${httpCode}`] });
+    res.status(httpCode).send({ uid: id, message: httpMessageMap[`${httpCode}`] });
   }
 };
 

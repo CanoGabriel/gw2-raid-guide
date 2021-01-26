@@ -1,5 +1,6 @@
 const { loginFromToken } = require("../../domains/user/service");
 const { APIError } = require("../error");
+// const logger = require("../logger");
 
 const extractBearerToken = (req) => {
   const { authorization } = req.headers;
@@ -15,15 +16,16 @@ const checkAuth = async (req, _res, next) => {
     try {
       const user = await loginFromToken(token);
       req.user = user;
-
       if (user.provider_id === "anonymous") {
         next();
-      } else if (user.email && user.email_verified) {
+      // } else if (user.email && user.email_verified) {
+      } else if (user.email) {
         next();
       } else if (user.email && !user.email_verified) {
         next(APIError("unauthorized", `Email ${user.email} not verified`, "EMAIL_NOT_VERIFIED"));
+      } else {
+        next(APIError("internal_server_error", "Unexpected auth error"));
       }
-      next(APIError("internal_server_error", "Unexpected auth error"));
     } catch (error) {
       next(error);
     }
