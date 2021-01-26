@@ -2,11 +2,10 @@ import React from "react";
 import {
   BrowserRouter as Router, Route, Switch,
 } from "react-router-dom";
-import { AuthRoute, AuthProvider } from "./shared";
+import { AuthRoute, AuthProvider, LoginPage } from "./domains/user";
 import RaidList from "./pages/raid-list/raid-list";
 import RaidDetail from "./pages/raid-detail/raid-detail";
 import RaidEditDetail from "./pages/raid-edit-detail/raid-edit-detail";
-import AuthenticationPage from "./pages/authentication-page/authentication-page";
 import "./app.scss";
 
 const App = () => (
@@ -18,11 +17,14 @@ const App = () => (
         </Route>
         <AuthRoute exact noAnonymous path="/raid/:id/edit" component={RaidEditDetail} />
         <AuthRoute exact path="/raid/:id" component={RaidDetail} />
-        <Route exact path="/login" component={AuthenticationPage} />
+        <Route exact path="/login" component={LoginPage} />
         <AuthRoute exact path="/" component={RaidList} />
       </Switch>
     </AuthProvider>
   </Router>
 );
 
+// TODO 404 page
+// TODO 403 page
+// TODO 401 page
 export default App;

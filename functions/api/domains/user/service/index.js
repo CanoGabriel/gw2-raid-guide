@@ -29,7 +29,7 @@ const loginFromToken = async (token) => {
     const user = await firebaseAdmin.auth().verifyIdToken(token);
     return user;
   } catch (error) {
-    if (error.code === "auth/user-token-expired") {
+    if (error.code === "auth/id-token-expired") {
       throw APIError("unauthorized", JSON.stringify(error.message, null, 2), "ERROR_TOKEN_REVOKED");
     } else if (typeof error.code === "string" && error.code.startsWith("auth/")) {
       throw APIError("unauthorized", JSON.stringify(error.message, null, 2));

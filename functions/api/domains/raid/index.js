@@ -1,5 +1,5 @@
 const router = require("express-promise-router")();
-const { checkAuth } = require("../../infrastructure/auth");
+const { checkAuth, checkNotAnonymous } = require("../../infrastructure/auth");
 const { handleGetRaid } = require("./routes/handle-get-raid");
 const { handleDeleteRaidById } = require("./routes/handle-delete-raid-by-id");
 const { handleCreateRaid } = require("./routes/handle-create-raid");
@@ -18,22 +18,22 @@ const { handleDeleteRaidLink } = require("./routes/handle-delete-raid-link");
 router.get("/", handleGetRaid);
 
 router.get("/:id", handleGetRaidById);
-router.put("/:id", handleUpdateRaidById);
-router.delete("/:id", handleDeleteRaidById);
+router.put("/:id", checkNotAnonymous, handleUpdateRaidById);
+router.delete("/:id", checkNotAnonymous, handleDeleteRaidById);
 
-router.put("/:raidId/boss/:bossId", handleUpdateRaidBossById);
-router.delete("/:raidId/boss/:bossId", handleDeleteRaidBoss);
-router.post("/:raidId/boss", handleCreateRaidBoss);
+router.put("/:raidId/boss/:bossId", checkNotAnonymous, handleUpdateRaidBossById);
+router.delete("/:raidId/boss/:bossId", checkNotAnonymous, handleDeleteRaidBoss);
+router.post("/:raidId/boss", checkNotAnonymous, handleCreateRaidBoss);
 
-router.put("/:raidId/section/:sectionId", handleUpdateRaidSectionById);
-router.delete("/:raidId/section/:sectionId", handleDeleteRaidSection);
-router.post("/:raidId/section", handleCreateRaidSection);
+router.put("/:raidId/section/:sectionId", checkNotAnonymous, handleUpdateRaidSectionById);
+router.delete("/:raidId/section/:sectionId", checkNotAnonymous, handleDeleteRaidSection);
+router.post("/:raidId/section", checkNotAnonymous, handleCreateRaidSection);
 
-router.put("/:raidId/link/:linkId", handleUpdateRaidLinkById);
-router.delete("/:raidId/link/:linkId", handleDeleteRaidLink);
-router.post("/:raidId/link", handleCreateRaidLink);
+router.put("/:raidId/link/:linkId", checkNotAnonymous, handleUpdateRaidLinkById);
+router.delete("/:raidId/link/:linkId", checkNotAnonymous, handleDeleteRaidLink);
+router.post("/:raidId/link", checkNotAnonymous, handleCreateRaidLink);
 
-router.post("/", handleCreateRaid);
+router.post("/", checkNotAnonymous, handleCreateRaid);
 
 const injector = (app) => {
   app.use("/raid", checkAuth, router);
