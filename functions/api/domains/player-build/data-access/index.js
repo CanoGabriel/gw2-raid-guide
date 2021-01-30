@@ -7,4 +7,9 @@ const createPlayerBuild = async (player) => {
   return { ...player, id: createdPlayerBuild.id };
 };
 
-module.exports = { createPlayerBuild };
+const selectPlayerBuildById = async (id) => {
+  const buildRef = await db.collection("player-build").doc(id).get();
+  if (buildRef.exists) return { ...buildRef.data(), id: buildRef.id };
+  return null;
+};
+module.exports = { createPlayerBuild, selectPlayerBuildById };

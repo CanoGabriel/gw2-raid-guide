@@ -1,4 +1,5 @@
 const playerBuildDataAccess = require("../data-access");
+const { APIError } = require("../../../infrastructure/error");
 
 const createPlayerBuild = async (player) => {
   const {
@@ -15,4 +16,10 @@ const createPlayerBuild = async (player) => {
   return { success: true, result };
 };
 
-module.exports = { createPlayerBuild };
+const getPlayerBuildById = async (id) => {
+  const result = await playerBuildDataAccess.selectPlayerBuildById(id);
+  if (result) return { success: true, result };
+  throw APIError("not_found");
+};
+
+module.exports = { createPlayerBuild, getPlayerBuildById };

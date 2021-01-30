@@ -1,7 +1,7 @@
 const { body, matchedData } = require("express-validator");
 const playerBuildService = require("../../service");
 
-const validateAddPlyerBuild = [
+const validateAddPlayerBuild = [
   body("mainClass").isString().exists(),
   body("image").notEmpty().exists(),
   body("image.key").isString().exists(),
@@ -18,4 +18,4 @@ const handleAddPlayerBuild = async (req, res) => {
   res.send(result);
 };
 
-module.exports = { handleAddPlayerBuild, validateAddPlyerBuild };
+module.exports = { handleAddPlayerBuild, validateAddPlayerBuild };
