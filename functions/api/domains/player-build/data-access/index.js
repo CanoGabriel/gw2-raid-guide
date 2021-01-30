@@ -12,4 +12,9 @@ const selectPlayerBuildById = async (id) => {
   if (buildRef.exists) return { ...buildRef.data(), id: buildRef.id };
   return null;
 };
-module.exports = { createPlayerBuild, selectPlayerBuildById };
+
+const deletePlayerBuildById = async (id) => {
+  await db.collection("player-build").doc(id).delete();
+  return { id };
+};
+module.exports = { createPlayerBuild, selectPlayerBuildById, deletePlayerBuildById };

@@ -22,4 +22,9 @@ const getPlayerBuildById = async (id) => {
   throw APIError("not_found");
 };
 
-module.exports = { createPlayerBuild, getPlayerBuildById };
+const deletePlayerBuildById = async (id) => {
+  const result = await playerBuildDataAccess.deletePlayerBuildById(id);
+  return { success: true, deleted: result.id };
+};
+
+module.exports = { createPlayerBuild, getPlayerBuildById, deletePlayerBuildById };
