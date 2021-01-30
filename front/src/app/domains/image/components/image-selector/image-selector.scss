@@ -1,0 +1,54 @@
+@import "../../../../shared/style/size.scss";
+
+.image-selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-selector__type{
+  display: flex;
+  font-size: $font-size-base;
+
+  .image-selector__radio{
+    padding: 5px;
+
+    &:not(:last-child){
+      margin-right: 10px; 
+    }
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+  .image-selector__radio--selected{
+    outline: 1px solid black;
+  }
+}
+
+.image-selector__image-list{
+  display: grid;
+  grid-template-columns: repeat(6, 100px);
+  grid-auto-rows: auto;
+  gap: 10px;
+}
+
+.image-selector__list-item, .image-selector__button {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.image-selector__list-item--selected{
+  outline: 3px solid red;
+  border-radius: 3px;
+}
+
+.image-selector__image {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  max-width: 100px;
+  max-height: 100px;
+}

@@ -1,8 +1,9 @@
 const router = require("express-promise-router")();
 const { checkAuth, checkNotAnonymous } = require("../../infrastructure/auth");
+const { validationCatcher } = require("../../infrastructure");
 const { handleGetRaid } = require("./routes/handle-get-raid");
 const { handleDeleteRaidById } = require("./routes/handle-delete-raid-by-id");
-const { handleCreateRaid } = require("./routes/handle-create-raid");
+const { handleCreateRaid, validateCreateRaid } = require("./routes/handle-create-raid");
 const { handleGetRaidById } = require("./routes/handle-get-raid-by-id");
 const { handleUpdateRaidById } = require("./routes/handle-update-raid");
 const { handleUpdateRaidBossById } = require("./routes/handle-update-raid-boss");
@@ -33,7 +34,7 @@ router.put("/:raidId/link/:linkId", checkNotAnonymous, handleUpdateRaidLinkById)
 router.delete("/:raidId/link/:linkId", checkNotAnonymous, handleDeleteRaidLink);
 router.post("/:raidId/link", checkNotAnonymous, handleCreateRaidLink);
 
-router.post("/", checkNotAnonymous, handleCreateRaid);
+router.post("/", checkNotAnonymous, validateCreateRaid, validationCatcher, handleCreateRaid);
 
 const injector = (app) => {
   app.use("/raid", checkAuth, router);

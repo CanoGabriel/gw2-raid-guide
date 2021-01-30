@@ -5,6 +5,7 @@ import FormEditSection from "../form-edit-section/form-edit-section";
 import { Button, TextField, usePopup } from "../../../../shared";
 import { updateBossInfo, deleteRaidBossById } from "../../../../services";
 import PopupAddSection from "../popup-add-section/popup-add-section";
+import { ImageSelector, ImageLoader } from "../../../../domains/image";
 import "./form-edit-boss.scss";
 
 const FormEditBoss = (props) => {
@@ -33,6 +34,7 @@ const FormEditBoss = (props) => {
     if (form.timer) update.timer = parseInt(form.timer, 10);
     if (form.armor) update.armor = parseInt(form.armor, 10);
     if (form.name) update.name = form.name;
+    if (form.image) update.image = form.image;
     if (form.addBreakBar) update.addBreakBar = parseInt(form.addBreakBar, 10);
     updateBossInfo(raidId, bossInfo.id, update);
   };
@@ -59,8 +61,12 @@ const FormEditBoss = (props) => {
     deleteRaidBossById(raidId, bossInfo.id).then(handleFetchRaid);
   };
 
-  useEffect(() => setFormInit(bossInfo), [boss]);
+  const handleImageChange = (image) => {
+    handleFormChange({ target: { name: "image", value: image } });
+  };
 
+  useEffect(() => setFormInit(bossInfo), [boss]);
+  console.log(formInit?.image, form?.image);
   return (
     <div className={classnames("form-edit-boss", className)}>
       <PopupAddSection bossId={bossInfo.id} popupConfig={popupConfigAddSection} />
@@ -73,6 +79,9 @@ const FormEditBoss = (props) => {
         {renderTextField("armor", "Armure")}
         {renderTextField("name", "Nom du boss")}
         {renderTextField("addBreakBar", "Bar de défiance des minions")}
+        {(form?.image || formInit?.image)
+        && <ImageLoader type={form?.image?.type || formInit?.image?.type} imageKey={form?.image?.key || formInit?.image?.key} />}
+        <ImageSelector type="boss" onConfirm={handleImageChange} initialValue={form?.image ? form?.image : formInit?.image} />
         <Button className="form-edit-boss__save" onClick={handleBossUpdate}>Save</Button>
       </form>
       <ul className="form-edit-boss__section-list">{bossSection?.map(generateBossSection)}</ul>

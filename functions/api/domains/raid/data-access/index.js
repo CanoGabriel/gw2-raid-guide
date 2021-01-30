@@ -4,11 +4,11 @@ const db = admin.firestore();
 
 const createRaid = async (raid) => {
   const {
-    name = "", backgroundColor, color, boss = [], imageURL = "",
+    name = "", backgroundColor, color, boss = [],
   } = raid;
   // Create raid instance
   const createdRaid = await db.collection("raid").add({
-    name, backgroundColor, color, imageURL,
+    name, backgroundColor, color,
   });
 
   // Create subcollection ref boss, section, section-link
@@ -19,10 +19,10 @@ const createRaid = async (raid) => {
   // Add boss data
   const bossIds = await Promise.all(boss.map(async (bossInfo) => {
     const {
-      name: bossName, health, armor, breakBar, addBreakBar, hitboxSize, timer,
+      name: bossName, health, armor, breakBar, addBreakBar, hitboxSize, timer, image,
     } = bossInfo;
     const bossRef = await bossCollection.add({
-      name: bossName, health, armor, breakBar, addBreakBar, hitboxSize, timer,
+      name: bossName, health, armor, breakBar, addBreakBar, hitboxSize, timer, image,
     });
     return bossRef.id;
   }));
@@ -90,10 +90,10 @@ const updateRaidSectionLink = async (raidId, linkId, updateSectionLink) => {
 const createRaidBoss = async (raidId, bossInfo = {}) => {
   const bossCollection = db.collection("raid").doc(raidId).collection("boss");
   const {
-    name, health, armor, breakBar, addBreakBar, hitboxSize, timer,
+    name, health, armor, breakBar, addBreakBar, hitboxSize, timer, image,
   } = bossInfo;
   await bossCollection.add({
-    name, health, armor, breakBar, addBreakBar, hitboxSize, timer,
+    name, health, armor, breakBar, addBreakBar, hitboxSize, timer, image,
   });
 };
 

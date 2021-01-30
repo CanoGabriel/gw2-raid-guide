@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Page } from "../../shared";
+import { ImageLoader } from "../../domains/image";
 import { formatAmount } from "../../utils";
 import { fetchRaidById } from "../../services";
 import "./raid-detail.scss";
@@ -40,12 +41,13 @@ const RaidDetail = () => {
 
   const generateBossFrame = (boss) => {
     const {
-      id: bossId, health, breakBar, addBreakBar, hitBoxSize, armor, timer, name: bossName,
+      id: bossId, health, breakBar, addBreakBar, hitBoxSize, armor, timer, name: bossName, image,
     } = boss;
     const section = raidDetail?.section?.filter((sectionContent) => sectionContent?.boss === bossId);
     return (
       <li className="raid__boss">
         <span>{bossName}</span>
+        {image && <ImageLoader type={image?.type} imageKey={image?.key} />}
         <div className="raid__boss__detail">
           <span className="raid__boss__data">{formatAmount(health)}</span>
           <span className="raid__boss__data">{breakBar}</span>

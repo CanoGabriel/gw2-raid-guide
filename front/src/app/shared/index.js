@@ -4,6 +4,8 @@ import Page from "./components/page/page";
 import Popup from "./components/popup/popup";
 import TextField from "./components/text-field/text-field";
 
+import Radio from "./components/radio/radio";
+
 import usePopup from "./custom-hook/use-popup";
 
 export {
@@ -12,5 +14,6 @@ export {
   Page,
   Popup,
   TextField,
+  Radio,
   usePopup,
 };
