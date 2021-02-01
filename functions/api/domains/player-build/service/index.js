@@ -16,6 +16,14 @@ const createPlayerBuild = async (player) => {
   return { success: true, result };
 };
 
+const updatePlayerBuildById = async (id, playerBuildUpdate) => {
+  const result = await playerBuildDataAccess.updatePlayerBuildById(id, playerBuildUpdate);
+  if (result) {
+    return { success: true, result };
+  }
+  throw APIError("not_found", `Unable to update the player-build entity ${id}`);
+};
+
 const getPlayerBuildById = async (id) => {
   const result = await playerBuildDataAccess.selectPlayerBuildById(id);
   if (result) return { success: true, result };
@@ -27,4 +35,6 @@ const deletePlayerBuildById = async (id) => {
   return { success: true, deleted: result.id };
 };
 
-module.exports = { createPlayerBuild, getPlayerBuildById, deletePlayerBuildById };
+module.exports = {
+  createPlayerBuild, getPlayerBuildById, deletePlayerBuildById, updatePlayerBuildById,
+};

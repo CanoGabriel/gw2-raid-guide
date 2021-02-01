@@ -7,7 +7,7 @@ const validateDeletePlayerBuildById = [
 
 const handleDeletePlayerBuildById = async (req, res) => {
   const { id } = matchedData(req, { locations: ["params"] });
-  const result = await playerBuildService.getPlayerBuildById(id);
+  const result = await playerBuildService.deletePlayerBuildById(id);
   res.send(result);
 };
 

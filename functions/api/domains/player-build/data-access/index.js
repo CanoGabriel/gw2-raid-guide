@@ -17,4 +17,25 @@ const deletePlayerBuildById = async (id) => {
   await db.collection("player-build").doc(id).delete();
   return { id };
 };
-module.exports = { createPlayerBuild, selectPlayerBuildById, deletePlayerBuildById };
+
+const updatePlayerBuildById = async (id, playerBuildUpdate = {}) => {
+  const playerBuildRef = db.collection("player-build").doc(id);
+  const playerToUpdate = await playerBuildRef.get();
+  const update = {};
+  if (playerBuildUpdate.mainClass) update.mainClass = playerBuildUpdate.mainClass;
+  if (playerBuildUpdate.image && playerBuildUpdate.image.key) update["image.key"] = playerBuildUpdate.image.key;
+  if (playerBuildUpdate.image && playerBuildUpdate.image.type) update["image.type"] = playerBuildUpdate.image.type;
+  if (playerBuildUpdate.role) update.role = playerBuildUpdate.role;
+  if (playerBuildUpdate.buildLink) update.buildLink = playerBuildUpdate.buildLink;
+  if (playerBuildUpdate.rotationLink) update.rotationLink = playerBuildUpdate.rotationLink;
+  if (playerBuildUpdate.description) update.description = playerBuildUpdate.description;
+
+  const isFieldToUpdate = Object.keys(update).length > 0;
+
+  if (playerToUpdate.exists && isFieldToUpdate) return playerBuildRef.update(update);
+  if (playerToUpdate.exists && !isFieldToUpdate) return {};
+  return null;
+};
+module.exports = {
+  createPlayerBuild, selectPlayerBuildById, deletePlayerBuildById, updatePlayerBuildById,
+};
