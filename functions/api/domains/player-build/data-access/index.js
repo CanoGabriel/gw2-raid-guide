@@ -36,6 +36,12 @@ const updatePlayerBuildById = async (id, playerBuildUpdate = {}) => {
   if (playerToUpdate.exists && !isFieldToUpdate) return {};
   return null;
 };
+
+const selectAllPlayerBuild = async () => {
+  const raidRef = await db.collection("player-build").get();
+  const result = raidRef.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  return result;
+};
 module.exports = {
-  createPlayerBuild, selectPlayerBuildById, deletePlayerBuildById, updatePlayerBuildById,
+  createPlayerBuild, selectPlayerBuildById, deletePlayerBuildById, updatePlayerBuildById, selectAllPlayerBuild,
 };

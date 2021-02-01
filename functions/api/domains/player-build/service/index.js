@@ -35,6 +35,11 @@ const deletePlayerBuildById = async (id) => {
   return { success: true, deleted: result.id };
 };
 
+const getAllPlayerBuild = async () => {
+  const result = await playerBuildDataAccess.selectAllPlayerBuild();
+  return { success: true, result };
+};
+
 module.exports = {
-  createPlayerBuild, getPlayerBuildById, deletePlayerBuildById, updatePlayerBuildById,
+  createPlayerBuild, getPlayerBuildById, deletePlayerBuildById, updatePlayerBuildById, getAllPlayerBuild,
 };
