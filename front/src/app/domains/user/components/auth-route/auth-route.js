@@ -6,7 +6,7 @@ const AuthRoute = (props) => {
   const {
     component: Component, noAnonymous, path, ...rest
   } = props;
-  const { isSignedIn, isAnonymous } = useContext(AuthContext);
+  const { isSignedIn, isAnonymous, isAuthLoading } = useContext(AuthContext);
 
   const allowDisplay = () => {
     if (isSignedIn) {
@@ -14,6 +14,8 @@ const AuthRoute = (props) => {
     }
     return false;
   };
+
+  if (isAuthLoading) return false;
 
   const render = (renderProps) => (allowDisplay() ? <Component {...renderProps} /> : <Redirect to="/login" />);
 

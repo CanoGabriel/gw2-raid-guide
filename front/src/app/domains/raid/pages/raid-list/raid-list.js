@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchAllRaid } from "../../services";
-import { Button, Page, usePopup } from "../../shared";
+import { fetchAllRaid } from "../../../../services";
+import {
+  Button, Page, usePopup, IconWrapper, AddIcon,
+} from "../../../../shared";
 import PopupRaidCreate from "./components/popup-raid/popup-raid";
+import RaidCard from "../../components/raid-card/raid-card";
 import "./raid-list.scss";
 
 const RaidList = () => {
@@ -19,13 +22,13 @@ const RaidList = () => {
     handleFetchRaid();
   }, []);
 
-  const generateRaidItem = (raidItem) => {
-    const {
-      name, id, color, backgroundColor,
-    } = raidItem;
+  const generateRaidItem = (raidDetail) => {
+    const { color, backgroundColor, id } = raidDetail;
     return (
       <li className="raid__item" key={id} style={{ backgroundColor, color }}>
-        <Link to={`raid/${id}`}><span>{name}</span></Link>
+        <Link to={`raid/${id}`}>
+          <RaidCard raid={raidDetail} />
+        </Link>
       </li>
     );
   };
@@ -36,8 +39,8 @@ const RaidList = () => {
       <h1 className="raid-list-page__title">Raid :</h1>
       <ul className="raid__list">
         {raidList.map(generateRaidItem)}
-        <Button onClick={showPopupCreateRaid}>Créer</Button>
       </ul>
+      <Button onClick={showPopupCreateRaid}><IconWrapper Component={AddIcon} /></Button>
     </Page>
   );
 };

@@ -11,6 +11,7 @@ const AuthProvider = (props) => {
   const { children } = props;
   const history = useHistory();
   const [user, setUser] = useState(false);
+  const [isAuthLoading, setAuthLoading] = useState(true);
 
   const isSignedIn = !!user;
   const isAnonymous = user?.provider_id === "anonymous";
@@ -44,17 +45,20 @@ const AuthProvider = (props) => {
   useEffect(() => {
     const token = getAuthToken();
     if (token && !user) {
-      getUser().catch((error) => {
-        if (error?.response?.status === 401) {
-          handleLogout();
-        }
-      });
+      setAuthLoading(true);
+      getUser()
+        .catch((error) => {
+          if (error?.response?.status === 401) {
+            handleLogout();
+          }
+        })
+        .finally(() => setAuthLoading(false));
     }
   }, []);
 
   return (
     <AuthContext.Provider value={{
-      user, handleAnonymously, handleLoginWithEmail, handleLogout, isSignedIn, isAnonymous,
+      user, handleAnonymously, handleLoginWithEmail, handleLogout, isSignedIn, isAnonymous, isAuthLoading,
     }}
     >
       <pre>{JSON.stringify(user, null, 2)}</pre>

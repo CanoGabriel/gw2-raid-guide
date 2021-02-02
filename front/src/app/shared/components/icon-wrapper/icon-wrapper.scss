@@ -1,0 +1,45 @@
+
+.icon-wrapper {
+	--icon-size: 1rem;
+	position: relative;
+	display: inline-flex;
+
+	svg {
+		display: block;
+		width: var(--icon-size);
+		height: var(--icon-size);
+		margin: auto;
+		color: inherit;
+		fill: currentColor;
+	}
+
+	.icon-wrapper__tooltip__wrapper{
+		display: flex;
+		justify-content: center;
+		visibility: hidden;
+		width: max-content;
+		pointer-events: none;
+
+		/* Position the tooltip */
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1;
+	}
+
+	.icon-wrapper__tooltip__text{
+		// background-color: $very-dark-grey;
+		background-color: black;
+		color: white;
+		text-align: center;
+		border-radius: 2px;
+		padding: 5px;
+		margin-top: 5px;
+
+	}
+
+	&:hover .icon-wrapper__tooltip__wrapper {
+		visibility: visible;
+	}
+}

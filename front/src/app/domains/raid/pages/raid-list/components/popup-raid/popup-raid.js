@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classnames from "classnames/dedupe";
-import { Popup, TextField, Button } from "../../../../shared";
-import { createRaid } from "../../../../services";
+import { Popup, TextField, Button } from "../../../../../../shared";
+import { createRaid } from "../../../../../../services";
 
 const PopupRaidCreate = (props) => {
   const {

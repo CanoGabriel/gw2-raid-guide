@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router, Route, Switch,
 } from "react-router-dom";
 import { AuthRoute, AuthProvider, LoginPage } from "./domains/user";
-import RaidList from "./pages/raid-list/raid-list";
+import { RaidListPage } from "./domains/raid";
 import RaidDetail from "./pages/raid-detail/raid-detail";
 import RaidEditDetail from "./pages/raid-edit-detail/raid-edit-detail";
 import Test from "./pages/test/test";
@@ -20,7 +20,7 @@ const App = () => (
         <AuthRoute exact path="/raid/:id" component={RaidDetail} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/test" component={Test} />
-        <AuthRoute exact path="/" component={RaidList} />
+        <AuthRoute exact path="/" component={RaidListPage} />
       </Switch>
     </AuthProvider>
   </Router>

@@ -1,0 +1,15 @@
+.raid-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.raid-card__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.raid-card__boss-image {
+  max-width: 120px;
+}
