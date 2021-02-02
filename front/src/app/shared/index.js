@@ -4,6 +4,7 @@ import Page from "./components/page/page";
 import Popup from "./components/popup/popup";
 import TextField from "./components/text-field/text-field";
 import Radio from "./components/radio/radio";
+import { TabNav, TabContent } from "./components/tabs";
 import IconWrapper from "./components/icon-wrapper/icon-wrapper";
 
 import { ReactComponent as EditIcon } from "./assets/edit.svg";
@@ -21,6 +22,8 @@ export {
   IconWrapper,
   Radio,
   usePopup,
+  TabNav,
+  TabContent,
   EditIcon,
   AddIcon,
   TrashIcon,

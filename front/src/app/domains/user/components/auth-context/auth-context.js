@@ -61,7 +61,6 @@ const AuthProvider = (props) => {
       user, handleAnonymously, handleLoginWithEmail, handleLogout, isSignedIn, isAnonymous, isAuthLoading,
     }}
     >
-      <pre>{JSON.stringify(user, null, 2)}</pre>
       {children}
     </AuthContext.Provider>
   );
