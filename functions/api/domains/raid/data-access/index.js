@@ -63,7 +63,16 @@ const getRaidById = async (raidId) => {
 
 const getAllRaid = async () => {
   const raidRef = await db.collection("raid").get();
-  const result = raidRef.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  const raidList = raidRef.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+
+  // Get boss details
+  const result = await Promise.all(raidList.map(async (raid) => {
+    const { id: raidId } = raid;
+    const bossListRef = await db.collection("raid").doc(raidId).collection("boss").get();
+    const boss = bossListRef.docs.map((bossInfo) => ({ ...bossInfo.data(), id: bossInfo.id }));
+    return { ...raid, boss };
+  }));
+
   return { success: true, result };
 };
 

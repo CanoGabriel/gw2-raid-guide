@@ -42,6 +42,7 @@ const selectAllPlayerBuild = async () => {
   const result = raidRef.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
   return result;
 };
+
 module.exports = {
   createPlayerBuild, selectPlayerBuildById, deletePlayerBuildById, updatePlayerBuildById, selectAllPlayerBuild,
 };
