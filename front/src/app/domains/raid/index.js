@@ -1,4 +1,4 @@
 import RaidListPage from "./pages/raid-list/raid-list";
+import RaidDetailPage from "./pages/raid-detail/raid-detail";
 
-// eslint-disable-next-line import/prefer-default-export
-export { RaidListPage };
+export { RaidListPage, RaidDetailPage };

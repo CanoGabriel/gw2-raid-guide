@@ -1,18 +1,39 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 
 const TabContent = (props) => {
   const {
-    tabNavConfig, className, children, id,
+    tabNavConfig, className, activeClassName, children, id,
   } = props;
 
-  if (tabNavConfig?.activeTab === id) {
-    return (
-      <div className={classnames("tab-content", className)}>{children}</div>
-    );
-  }
+  const active = tabNavConfig?.activeTab === id;
 
-  return false;
+  const classes = classnames(
+    "tab-content",
+    className,
+    { [activeClassName]: active, "tab-content--active": active },
+  );
+
+  return (
+    <div className={classes}>
+      {active && children}
+    </div>
+  );
+};
+
+TabContent.propTypes = {
+  className: PropTypes.string,
+  activeClassName: PropTypes.string,
+  tabNavConfig: PropTypes.shape({
+    activeTab: PropTypes.bool.isRequired,
+  }).isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
+
+TabContent.defaultProps = {
+  className: "",
+  activeClassName: "",
 };
 
 export default TabContent;

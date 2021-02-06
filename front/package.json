@@ -10,7 +10,9 @@
     "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
     "http-proxy-middleware": "^1.0.6",
+    "jest-junit": "^12.0.0",
     "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-firebaseui": "^4.1.0",
@@ -22,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --reporters=jest-junit --reporters=default",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,6 +44,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "coverageReporters": [
+    "text",
+    "cobertura",
+    "lcov"
+  ],
+  "jest-junit": {
+    "outputDirectory": "./coverage",
+    "outputName": "junit.xml",
+    "usePathForSuiteName": "true"
   },
   "devDependencies": {
     "eslint": "^7.18.0",

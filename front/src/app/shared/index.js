@@ -12,6 +12,9 @@ import { ReactComponent as AddIcon } from "./assets/plus.svg";
 import { ReactComponent as TrashIcon } from "./assets/trash.svg";
 
 import usePopup from "./custom-hook/use-popup";
+import useTab from "./custom-hook/use-tab";
+
+import TextInput from "./components/form/text-input/text-input";
 
 export {
   Button,
@@ -21,10 +24,12 @@ export {
   TextField,
   IconWrapper,
   Radio,
-  usePopup,
   TabNav,
   TabContent,
   EditIcon,
   AddIcon,
   TrashIcon,
+  usePopup,
+  useTab,
+  TextInput,
 };

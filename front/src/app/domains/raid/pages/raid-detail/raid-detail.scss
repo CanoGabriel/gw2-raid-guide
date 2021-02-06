@@ -1,0 +1,122 @@
+.raid-detail-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-size-base);
+    margin: 0 200px;
+}
+
+.raid-detail-page__title {
+    font-size: var(--font-size-title-l);
+    margin-bottom: 32px;
+}
+
+.boss__nav {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.boss {
+    background-color: white;
+    padding: 16px;
+    z-index: 1;
+}
+
+.boss__wrapper {
+    box-shadow: 5px 5px 10px -7px rgba(0,0,0,0.6);
+}
+
+.boss__navlink {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 16px 8px;
+    background-color: white;
+    border-radius: 0;
+    &:last-child {
+        border-top-right-radius: 8px;
+    }
+    
+    &:first-child {
+        border-top-left-radius: 8px;
+    }
+    
+    .boss__navlink__wrapper::after {
+        display: block;
+        content: "";
+        align-self: center;
+        margin-top: 8px;
+        width: 0;
+        transition: width 150ms linear;
+    }
+}
+
+.boss__navlink__wrapper {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.boss__navlink--active .boss__navlink__wrapper::after {
+    width: 70%;
+    border-bottom: 4px solid black;
+}
+
+.boss__metadata {
+    display: grid;
+    grid-template-areas: 
+    "name name name image"
+    "health breakBar hitbox image"
+    "armor breakBarAdds timer image";
+    align-items: center;
+    grid-template-columns: repeat(3, minmax(60px, 1fr)) 150px;
+    gap: 24px;
+
+    .boss__name {
+        grid-area: name;
+    }
+
+    .boss__image {
+        grid-area: image;
+        align-self: start;
+        width: 150px;
+        height: 150px;
+    }
+
+    .boss__health {
+        grid-area: health;
+    }
+    .boss__break-bar {
+        grid-area: breakBar;
+    }
+    .boss__add-break-bar {
+        grid-area: breakBarAdds;
+    }
+    .boss__hitbox-size {
+        grid-area: hitbox;
+    }
+    .boss__armor {
+        grid-area: armor;
+    }
+    .boss__timer {
+        grid-area: timer;
+    }
+}
+
+.boss__section__title {
+    font-size: var(--font-size-l);
+}
+
+.test-menu {
+    position: absolute;
+    margin: 10px;
+    top: 72px;
+    left: 100%;
+
+    span {
+        position: sticky;
+    }
+}

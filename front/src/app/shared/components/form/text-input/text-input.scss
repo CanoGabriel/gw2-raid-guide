@@ -1,0 +1,23 @@
+.text-input {
+	border: none;
+	outline: none;
+	padding: 8px;
+	font-size: var(--font-size-base);
+	border-radius: 4px;
+	box-shadow: inset 0px 0px 0px 1px var(--grey-medium);
+	
+	&:focus {
+		box-shadow: inset 0px 0px 0px 2px var(--blue-secondary);
+	}
+}
+
+.text-input--error {
+	box-shadow: inset 0px 0px 0px 1px var(--red);
+	
+	&:focus {
+		box-shadow: inset 0px 0px 0px 2px var(--red);
+	}
+}
+
+
+

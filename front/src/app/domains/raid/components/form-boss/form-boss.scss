@@ -1,0 +1,34 @@
+.form-boss {
+  // display: flex;
+  // flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr minmax(300px, 1fr);
+  grid-template-areas: 
+  "name name name image" 
+  ". . . image" 
+  ". . . image" 
+  "validate validate validate validate";
+}
+
+.form-boss__field {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-boss__name {
+  grid-area : name;
+}
+.form-boss__image {
+  grid-area : image;
+}
+
+.form-boss__confirm {
+  grid-area : validate;
+}
+
+.form-boss__title {
+  margin-bottom: 4px;
+  font-size: var(--font-size-base);
+  color: var(--black);
+}
