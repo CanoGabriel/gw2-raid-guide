@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { IconWrapper, usePopup } from "../../../../shared";
+import { AuthContext } from "../../../user";
 import { ReactComponent as IconTrash } from "../../../../shared/assets/trash.svg";
 import { ReactComponent as IconEdit } from "../../../../shared/assets/edit.svg";
 import { deleteRaidLinkById } from "../../services";
@@ -12,6 +13,8 @@ const ViewLink = (props) => {
   const {
     className, raidId, link, onChange,
   } = props;
+
+  const { isAnonymous } = useContext(AuthContext);
 
   const { popupConfig: popupEditLinkConfig } = usePopup();
 
@@ -28,14 +31,16 @@ const ViewLink = (props) => {
     <div className={classnames("view-link", className)}>
       <PopupLink raidId={raidId} link={link} sectionId={link?.section} onConfirm={handleUpdate} popupConfig={popupEditLinkConfig} />
       <a className="view-link__link" href={link?.target} target="_blank" rel="noopenner noreferrer">{link?.label || link?.target}</a>
-      <div className="view-link__tool">
-        <button type="button" className="view-link__tool__action" onClick={popupEditLinkConfig.show}>
-          <IconWrapper className="view-link__tool__icon" Component={IconEdit} />
-        </button>
-        <button type="button" className="view-link__tool__action" onClick={handleDelete}>
-          <IconWrapper className="view-link__tool__icon" Component={IconTrash} />
-        </button>
-      </div>
+      {!isAnonymous && (
+        <div className="view-link__tool">
+          <button type="button" className="view-link__tool__action" onClick={popupEditLinkConfig.show}>
+            <IconWrapper className="view-link__tool__icon" Component={IconEdit} />
+          </button>
+          <button type="button" className="view-link__tool__action" onClick={handleDelete}>
+            <IconWrapper className="view-link__tool__icon" Component={IconTrash} />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

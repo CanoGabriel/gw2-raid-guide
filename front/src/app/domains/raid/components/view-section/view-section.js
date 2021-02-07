@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { IconWrapper, usePopup } from "../../../../shared";
+import { AuthContext } from "../../../user";
 import { ReactComponent as IconAdd } from "../../../../shared/assets/plus.svg";
 import { ReactComponent as IconTrash } from "../../../../shared/assets/trash.svg";
 import { ReactComponent as IconEdit } from "../../../../shared/assets/edit.svg";
@@ -14,6 +15,8 @@ const ViewSection = (props) => {
   const {
     className, raidId, bossId, section, onChange,
   } = props;
+
+  const { isAnonymous } = useContext(AuthContext);
 
   const { popupConfig: popupEditSectionConfig } = usePopup();
   const { popupConfig: popupAddLinkConfig } = usePopup();
@@ -48,18 +51,20 @@ const ViewSection = (props) => {
         popupConfig={popupAddLinkConfig}
         onConfirm={handleAddLink}
       />
-      <div className="view-section__tool">
-        <button type="button" className="view-section__tool__action" onClick={popupEditSectionConfig.show}>
-          <IconWrapper className="view-section__tool__icon" Component={IconEdit} />
-        </button>
-        <button type="button" className="view-section__tool__action" onClick={handleDelete}>
-          <IconWrapper className="view-section__tool__icon" Component={IconTrash} />
-        </button>
-        <button type="button" className="view-section__tool__action view-section__tool__add" onClick={popupAddLinkConfig.show}>
-          <IconWrapper className="view-section__tool__icon" Component={IconAdd} />
-          <span>Ajouter un lien</span>
-        </button>
-      </div>
+      {!isAnonymous && (
+        <div className="view-section__tool">
+          <button type="button" className="view-section__tool__action" onClick={popupEditSectionConfig.show}>
+            <IconWrapper className="view-section__tool__icon" Component={IconEdit} />
+          </button>
+          <button type="button" className="view-section__tool__action" onClick={handleDelete}>
+            <IconWrapper className="view-section__tool__icon" Component={IconTrash} />
+          </button>
+          <button type="button" className="view-section__tool__action view-section__tool__add" onClick={popupAddLinkConfig.show}>
+            <IconWrapper className="view-section__tool__icon" Component={IconAdd} />
+            <span>Ajouter un lien</span>
+          </button>
+        </div>
+      )}
       <h2 className="view-section__title">{section?.title}</h2>
     </div>
   );
