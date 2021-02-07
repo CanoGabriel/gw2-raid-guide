@@ -3,7 +3,9 @@ import {
   BrowserRouter as Router, Route, Switch,
 } from "react-router-dom";
 import { AuthRoute, AuthProvider, LoginPage } from "./domains/user";
-import { RaidListPage, RaidDetailPage } from "./domains/raid";
+import {
+  RaidListPage, RaidDetailPage, CreateBossPage, EditBossPage,
+} from "./domains/raid";
 // import RaidEditDetail from "./pages/raid-edit-detail/raid-edit-detail";
 import Test from "./pages/test/test";
 import "./app.scss";
@@ -16,6 +18,8 @@ const App = () => (
           404
         </Route>
         {/* <AuthRoute exact noAnonymous path="/raid/:id/edit" component={RaidEditDetail} /> */}
+        <AuthRoute exact path="/raid/:id/boss/new" component={CreateBossPage} />
+        <AuthRoute exact path="/raid/:id/boss/:bossId/edit" component={EditBossPage} />
         <AuthRoute exact path="/raid/:id" component={RaidDetailPage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/test" component={Test} />

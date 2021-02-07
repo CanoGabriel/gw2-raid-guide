@@ -1,0 +1,29 @@
+.view-link {
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+
+  .view-link__link {
+    flex-grow: 1;
+    font-size: var(--font-size-l);
+    color: var(--black);
+  }
+
+  .view-link__tool{
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+  }
+
+  .view-link__tool__action {
+    padding: 8px;
+
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
+
+  .view-link__tool__icon {
+    --icon-size: 2rem;
+  }
+}

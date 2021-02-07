@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
 import {
+  IconWrapper,
   Page, TabContent, TabNav, useTab,
 } from "../../../../shared";
-import { ImageLoader } from "../../../image";
-import { formatAmount } from "../../../../utils";
-import { fetchRaidById } from "../../../../services";
+import { AuthContext } from "../../../user";
+import { fetchRaidById } from "../../services";
+import { ReactComponent as IconAdd } from "../../../../shared/assets/plus.svg";
+import ViewBoss from "../../components/view-boss/view-boss";
+import ViewSection from "../../components/view-section/view-section";
+import ViewLink from "../../components/view-link/view-link";
 import "./raid-detail.scss";
 
 const RaidDetail = () => {
   const { id } = useParams();
   const [raidDetail, setRaidDetail] = useState({});
+  const { isAnonymous } = useContext(AuthContext);
   const bossTabConfig = useTab();
 
   const handleFetchRaidDetail = () => {
@@ -21,23 +26,38 @@ const RaidDetail = () => {
 
   useEffect(handleFetchRaidDetail, []);
 
+  const selectFirstBossTab = (activeBossId) => {
+    const bossList = raidDetail?.boss || [];
+    bossTabConfig?.setActiveTab(activeBossId || bossList[0]?.id);
+  };
+
+  const refreshRaidDetails = (activeBossId) => {
+    handleFetchRaidDetail();
+    selectFirstBossTab(activeBossId);
+  };
+
   const generateSectionLink = (sectionLink) => {
-    const { target = "", label = "" } = sectionLink;
+    const { bossId, ...link } = sectionLink;
     return (
       <li className="links__link">
-        <a className="links__target" href={target} target="_blank" rel="noopenner noreferrer">{label || target}</a>
+        <ViewLink raidId={id} link={link} onChange={() => refreshRaidDetails(bossId)} />
       </li>
     );
   };
 
   const generateSection = (section) => {
-    const { id: sectionId, title } = section;
+    const { id: sectionId } = section;
     const links = raidDetail?.sectionLink?.filter((linkContent) => linkContent?.section === sectionId);
 
     return (
       <li className="boss__section__item">
-        <h2 className="boss__section__title">{title}</h2>
-        <ul className="boss__section__links">{links.map(generateSectionLink)}</ul>
+        <ViewSection
+          raidId={id}
+          section={section}
+          bossId={section?.boss}
+          onChange={refreshRaidDetails}
+        />
+        <ul className="boss__section__links">{links.map((link) => generateSectionLink({ ...link, bossId: section?.boss }))}</ul>
       </li>
     );
   };
@@ -52,30 +72,23 @@ const RaidDetail = () => {
       <span className="boss__navlink__wrapper">{bossDetail?.name}</span>
     </TabNav>
   );
+
   const generateBossTabContent = (bossDetail) => {
-    const {
-      id: bossId, health, breakBar, addBreakBar, hitboxSize, armor, timer, name: bossName, image,
-    } = bossDetail;
+    const { id: bossId } = bossDetail;
     const section = raidDetail?.section?.filter((sectionContent) => sectionContent?.boss === bossId);
 
     return (
       <TabContent
         id={bossDetail?.id}
-        activeClassName="boss"
+        activeClassName="boss-tab--active"
         tabNavConfig={bossTabConfig}
       >
-        <div className="boss__metadata">
-          <span className="boss__field boss__name">{bossName}</span>
-          {image && <ImageLoader className="boss__image" type={image?.type} imageKey={image?.key} />}
-          <span className="boss__field boss__health">
-            {`${formatAmount(health)} PV`}
-          </span>
-          <span className="boss__field boss__break-bar">{breakBar}</span>
-          <span className="boss__field boss__add-break-bar">{addBreakBar}</span>
-          <span className="boss__field boss__hitbox-size">{hitboxSize}</span>
-          <span className="boss__field boss__armor">{armor}</span>
-          <span className="boss__field boss__timer">{timer}</span>
-        </div>
+        <ViewBoss
+          raidId={id}
+          boss={bossDetail}
+          onDelete={refreshRaidDetails}
+          onAddSection={refreshRaidDetails}
+        />
         <ul className="raid__boss__section">{section.map(generateSection)}</ul>
       </TabContent>
     );
@@ -83,20 +96,23 @@ const RaidDetail = () => {
 
   useEffect(() => {
     // show first boss by default in tab
-    if (!bossTabConfig?.activeTab) {
-      const bossList = raidDetail?.boss || [];
-      bossTabConfig?.setActiveTab(bossList[0]?.id);
-    }
+    selectFirstBossTab(bossTabConfig?.activeTab);
   }, [raidDetail]);
 
   return (
     <Page className="raid-detail-page">
       <h1 className="raid-detail-page__title">{raidDetail?.name}</h1>
+      {!isAnonymous && (
+        <Link className="raid-detail-page__add-boss" to={`/raid/${id}/boss/new`}>
+          <IconWrapper className="raid-detail-page__add-boss__icon" Component={IconAdd} />
+          <span>Ajouter un boss</span>
+        </Link>
+      )}
       <div className="boss__wrapper">
         <ul className="boss__nav">{raidDetail?.boss?.map(generateBossTabNav)}</ul>
         {raidDetail?.boss?.map(generateBossTabContent)}
       </div>
-      <div className="test-menu"><span>coucou</span></div>
+      {/* <div className="test-menu"><span>coucou</span></div> */}
     </Page>
   );
 };

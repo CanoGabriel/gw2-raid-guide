@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchRaidById } from "../../../../services/index";
+import { fetchRaidById } from "../../services";
 
 const RaidContext = createContext({});
 
@@ -9,23 +9,25 @@ const RaidContextProvider = ({ children }) => {
   const [data, setData] = useState({});
 
   const handleFetchRaid = () => {
-    fetchRaidById(raidId).then((response) => {
-      const storedRaid = response?.data?.result;
-      if (storedRaid) {
-        setData(storedRaid);
-      }
-    });
+    if (raidId) {
+      fetchRaidById(raidId).then((response) => {
+        const storedRaid = response?.data?.result;
+        if (storedRaid) {
+          setData(storedRaid);
+        }
+      });
+    }
   };
 
-  useEffect(handleFetchRaid, []);
+  useEffect(handleFetchRaid, [raidId]);
 
   const {
-    boss, section, sectionLink, ...raid
+    boss: bosses = [], section: sections = [], sectionLink: links = [], ...raid
   } = data;
-
+  console.log(raidId);
   return (
     <RaidContext.Provider value={{
-      raidId, raid, boss, section, sectionLink, handleFetchRaid,
+      raidId, raid, bosses, sections, links, handleFetchRaid,
     }}
     >
       {children}

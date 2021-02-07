@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import { Button, TextInput } from "../../../../shared";
-import { ImageSelector, ImageLoader } from "../../../image";
-import { checkFormError } from "../../../../utils";
+import {
+  Button, TextInput, FieldWrapper, usePopup,
+} from "../../../../shared";
+import { PopupImageSelector, ImageLoader } from "../../../image";
+import { checkFormError } from "../../../../shared/utils";
 import "./form-boss.scss";
 
 const FormBoss = (props) => {
@@ -14,6 +16,7 @@ const FormBoss = (props) => {
   const [form, setForm] = useState({});
   const [formError, setFormError] = useState({});
   const [formInit, setFormInit] = useState({});
+  const { popupConfig: popupImageSelectConfig } = usePopup();
 
   const handleFormChange = (name, value) => {
     setForm((oldForm) => ({ ...oldForm, [name]: value }));
@@ -23,16 +26,29 @@ const FormBoss = (props) => {
     handleFormChange("image", image);
   };
 
-  const getFieldValue = (fieldName) => form?.[fieldName] || formInit?.[fieldName];
+  const getFieldValue = (fieldName) => (form?.[fieldName] !== undefined ? form?.[fieldName] : formInit?.[fieldName]);
 
   const fields = [
+    {
+      name: "name",
+      title: "Nom du boss",
+      field: (
+        <TextInput
+          onChange={(name) => handleFormChange("name", name)}
+          className="form-boss__hitbox-size"
+          name="name"
+          value={getFieldValue("name")}
+          hasError={formError?.name}
+        />
+      ),
+    },
     {
       name: "hitboxSize",
       title: "Taille de la hitbox",
       field: (
         <TextInput
           onChange={(hitboxSize) => handleFormChange("hitboxSize", hitboxSize)}
-          className="form-edit-boss__hitbox-size"
+          className="form-boss__hitbox-size"
           name="hitboxSize"
           value={getFieldValue("hitboxSize")}
           hasError={formError?.hitboxSize}
@@ -45,7 +61,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(health) => handleFormChange("health", health)}
-          className="form-edit-boss__hitbox-size"
+          className="form-boss__hitbox-size"
           name="health"
           value={getFieldValue("health")}
           hasError={formError?.health}
@@ -58,7 +74,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(breakBar) => handleFormChange("breakBar", breakBar)}
-          className="form-edit-boss__hitbox-size"
+          className="form-boss__hitbox-size"
           name="breakBar"
           value={getFieldValue("breakBar")}
           hasError={formError?.breakBar}
@@ -71,7 +87,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(timer) => handleFormChange("timer", timer)}
-          className="form-edit-boss__hitbox-size"
+          className="form-boss__hitbox-size"
           name="timer"
           value={getFieldValue("timer")}
           hasError={formError?.timer}
@@ -84,39 +100,11 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(armor) => handleFormChange("armor", armor)}
-          className="form-edit-boss__hitbox-size"
+          className="form-boss__hitbox-size"
           name="armor"
           value={getFieldValue("armor")}
           hasError={formError?.armor}
         />
-      ),
-    },
-    {
-      name: "name",
-      title: "Nom du boss",
-      field: (
-        <TextInput
-          onChange={(name) => handleFormChange("name", name)}
-          className="form-edit-boss__hitbox-size"
-          name="name"
-          value={getFieldValue("name")}
-          hasError={formError?.name}
-        />
-      ),
-    },
-    {
-      name: "image",
-      title: "Image",
-      field: (
-        <>
-          {form?.image?.key && <ImageLoader type={form?.image?.type} imageKey={form?.image?.key} />}
-          <ImageSelector
-            imageType="boss"
-            onConfirm={handleImageChange}
-            initialValue={form?.image || formInit?.image}
-            hasError={formError?.image}
-          />
-        </>
       ),
     },
     {
@@ -125,11 +113,33 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(addBreakBar) => handleFormChange("addBreakBar", addBreakBar)}
-          className="form-edit-boss__hitbox-size"
+          className="form-boss__hitbox-size"
           name="addBreakBar"
           value={getFieldValue("addBreakBar")}
           hasError={formError?.addBreakBar}
         />
+      ),
+    },
+    {
+      name: "image",
+      title: "Image",
+      field: (
+        <div className={classnames("form-boss__image__field", { "form-boss__image__field--error": formError?.image })}>
+          {(formInit?.image || form?.image) && (
+            <ImageLoader
+              className="form-boss__image__preview"
+              type={form?.image?.type !== undefined ? form?.image?.type : formInit?.image?.type}
+              imageKey={form?.image?.key !== undefined ? form?.image?.key : formInit?.image?.key}
+            />
+          )}
+          <PopupImageSelector
+            popupConfig={popupImageSelectConfig}
+            imageType="boss"
+            onConfirm={handleImageChange}
+            initialValue={form?.image || formInit?.image}
+          />
+          <Button className="form-boss__image__choice" onClick={popupImageSelectConfig.show}>Choisir une image</Button>
+        </div>
       ),
     },
   ];
@@ -137,18 +147,20 @@ const FormBoss = (props) => {
   const generateField = (fieldConfig) => {
     const { field, title, name } = fieldConfig;
     return (
-      <div key={name} className={`form-boss__field form-boss__${name}`}>
-        <span className="form-boss__title">{title}</span>
-        {field}
-      </div>
+      <FieldWrapper
+        key={name}
+        field={field}
+        title={title}
+        className={`form-boss__field form-boss__${name}`}
+      />
     );
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newFormError = onValidate(form);
+    const newFormError = onValidate({ ...formInit, ...form });
     if (!checkFormError(newFormError)) {
-      onSubmit(form);
+      onSubmit({ ...formInit, ...form });
     }
   };
 
@@ -157,9 +169,9 @@ const FormBoss = (props) => {
 
   // Handle continuous form validation
   useEffect(() => {
-    const newFormError = onValidate(form) || {};
+    const newFormError = onValidate({ ...formInit, ...form }) || {};
     setFormError(newFormError);
-  }, [form]);
+  }, [form, formInit]);
 
   return (
     <form className={classnames("form-boss", className)}>

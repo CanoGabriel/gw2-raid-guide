@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchAllRaid } from "../../../../services";
+import { fetchAllRaid } from "../../services";
 import {
   Button, Page, usePopup, IconWrapper, AddIcon,
 } from "../../../../shared";

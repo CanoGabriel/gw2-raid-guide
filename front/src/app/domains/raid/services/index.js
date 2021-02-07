@@ -1,4 +1,4 @@
-import { http } from "../configuration";
+import { http } from "../../../configuration";
 
 const fetchAllRaid = async () => http.get("/raid");
 

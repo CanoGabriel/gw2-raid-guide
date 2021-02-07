@@ -31,9 +31,9 @@ const ImageSelector = (props) => {
     onConfirm(newChoice, event);
   };
 
-  const handleReset = () => {
-    setChoice(false);
-  };
+  // const handleReset = () => {
+  //   setChoice(false);
+  // };
 
   // Handle initial value
   useEffect(() => {
@@ -41,12 +41,6 @@ const ImageSelector = (props) => {
       setChoice(initialValue);
     }
   }, [initialValue, choice]);
-
-  if (choice) {
-    return (
-      <Button onClick={handleReset}>Choisir une image</Button>
-    );
-  }
 
   return (
     <div className={classnames("image-selector", className)}>

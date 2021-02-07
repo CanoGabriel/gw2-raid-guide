@@ -1,0 +1,73 @@
+.boss {
+  display: grid;
+    grid-template-areas: 
+    "tool tool tool tool"
+    "name name name image"
+    "health breakBar hitbox image"
+    "armor breakBarAdds timer image";
+    align-items: center;
+    grid-template-columns: repeat(3, minmax(60px, 1fr)) 150px;
+    grid-template-rows: auto 1fr 1fr 1fr;
+
+    .boss__tool{
+        justify-self: end;    
+        grid-area: tool;
+        display: flex;
+        flex-direction: row;
+        
+    }
+
+    .boss__tool__action{
+        padding: 8px;
+
+
+        &:not(:last-child){
+            margin-right: 4px;
+        }
+
+        .boss__tool__icon{
+            --icon-size: 2rem;
+        }
+
+    }
+    
+    .boss__tool__add {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+        .boss__tool__icon {
+            margin-right: 4px;
+        }
+    }
+
+    .boss__name {
+        grid-area: name;
+    }
+
+    .boss__image {
+        grid-area: image;
+        align-self: start;
+        width: 150px;
+        height: 150px;
+    }
+
+    .boss__health {
+        grid-area: health;
+    }
+    .boss__break-bar {
+        grid-area: breakBar;
+    }
+    .boss__add-break-bar {
+        grid-area: breakBarAdds;
+    }
+    .boss__hitbox-size {
+        grid-area: hitbox;
+    }
+    .boss__armor {
+        grid-area: armor;
+    }
+    .boss__timer {
+        grid-area: timer;
+    }
+}

@@ -1,0 +1,38 @@
+.view-section {
+  display: flex;
+  flex-direction: column;
+  padding:: 16px;
+
+  .view-section__title {
+    font-size: var(--font-size-l);
+    color: var(--black);
+  }
+
+  .view-section__tool{
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+  }
+
+  .view-section__tool__action {
+    padding: 8px;
+
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
+
+  .view-section__tool__icon {
+    --icon-size: 2rem;
+  }
+  
+  .view-section__tool__add {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    .view-section__tool__icon {
+      margin-right: 4px;
+    }
+  }
+}

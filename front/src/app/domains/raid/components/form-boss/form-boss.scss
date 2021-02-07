@@ -11,16 +11,33 @@
 }
 
 .form-boss__field {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
+  padding: 16px;  
 }
 
 .form-boss__name {
   grid-area : name;
 }
+
 .form-boss__image {
   grid-area : image;
+  min-height: 430px;
+}
+
+.form-boss__image__field {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 2px var(--red);
+  flex-grow: 1;
+}
+
+.form-boss__image__preview{
+  flex-grow: 1;
+  object-fit: cover;
+}
+
+.form-boss__image__choice {
+  flex-shrink: 1;
+  flex-grow: 1;
 }
 
 .form-boss__confirm {

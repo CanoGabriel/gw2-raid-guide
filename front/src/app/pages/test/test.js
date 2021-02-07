@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import { TextInput } from "../../shared";
-import FormBoss from "../../domains/raid/components/form-boss/form-boss";
+import React from "react";
+// import { usePopup } from "../../shared";
+// import PopupCreate from "../../domains/image/components/popup-image-selector/popup-image-selector";
 
-const Test = () => {
-  const [text, setText] = useState();
-
-  return (
-    <main>
-      <TextInput value={text} onChange={(newText) => setText(newText)} name="test" placeholder="coucou" />
-      <FormBoss onSubmit={(data) => console.log(data)} onValidate={() => ({})} />
-    </main>
-  );
-};
-
+const Test = () => (
+  <main>
+    {/* <FormSection onSubmit={(data) => console.log(data)} onValidate={() => ({})} /> */}
+    {/* <FormBoss onSubmit={(data) => console.log(data)} onValidate={() => ({})} /> */}
+    {/* <FormLink onSubmit={(data) => console.log(data)} onValidate={() => ({})} /> */}
+  </main>
+);
 export default Test;

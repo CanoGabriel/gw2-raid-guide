@@ -1,0 +1,10 @@
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-wrapper__title {
+  margin-bottom: 4px;
+  font-size: var(--font-size-base);
+  color: var(--black);
+}

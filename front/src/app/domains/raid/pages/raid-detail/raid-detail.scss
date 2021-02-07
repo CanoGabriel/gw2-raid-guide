@@ -11,6 +11,18 @@
     margin-bottom: 32px;
 }
 
+.raid-detail-page__add-boss {
+    display: flex;
+    align-items: center;
+    align-self: end;
+    margin: 8px;
+    font-size: var(--font-size-base);
+    .raid-detail-page__add-boss__icon {
+        padding: 4px;
+        --icon-size: 2rem;
+    }
+}
+
 .boss__nav {
     display: flex;
     flex-direction: row;
@@ -20,13 +32,13 @@
 }
 
 .boss {
-    background-color: white;
     padding: 16px;
     z-index: 1;
 }
 
 .boss__wrapper {
     box-shadow: 5px 5px 10px -7px rgba(0,0,0,0.6);
+    background-color: white;
 }
 
 .boss__navlink {
@@ -34,7 +46,6 @@
     display: flex;
     flex-direction: column;
     padding: 16px 16px 8px;
-    background-color: white;
     border-radius: 0;
     &:last-child {
         border-top-right-radius: 8px;
@@ -65,49 +76,9 @@
     border-bottom: 4px solid black;
 }
 
-.boss__metadata {
-    display: grid;
-    grid-template-areas: 
-    "name name name image"
-    "health breakBar hitbox image"
-    "armor breakBarAdds timer image";
-    align-items: center;
-    grid-template-columns: repeat(3, minmax(60px, 1fr)) 150px;
-    gap: 24px;
-
-    .boss__name {
-        grid-area: name;
-    }
-
-    .boss__image {
-        grid-area: image;
-        align-self: start;
-        width: 150px;
-        height: 150px;
-    }
-
-    .boss__health {
-        grid-area: health;
-    }
-    .boss__break-bar {
-        grid-area: breakBar;
-    }
-    .boss__add-break-bar {
-        grid-area: breakBarAdds;
-    }
-    .boss__hitbox-size {
-        grid-area: hitbox;
-    }
-    .boss__armor {
-        grid-area: armor;
-    }
-    .boss__timer {
-        grid-area: timer;
-    }
-}
-
-.boss__section__title {
-    font-size: var(--font-size-l);
+.boss-tab--active {
+    display: flex;
+    flex-direction: column;
 }
 
 .test-menu {

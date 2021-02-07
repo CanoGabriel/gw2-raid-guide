@@ -4,6 +4,32 @@
   position: absolute;
   margin: 30px 200px;
   background-color: $white;
-  max-width: 600px;
   align-self: center;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  width: 1000px;
+}
+
+.popup__header {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  align-items: center;
+
+}
+
+.popup__title {
+  flex-grow: 1;
+  font-size: var(--font-size-l);
+}
+
+.popup__close {
+  padding: 4px;
+}
+
+.popup__close__icon{
+  --icon-size: 20px; 
 }
