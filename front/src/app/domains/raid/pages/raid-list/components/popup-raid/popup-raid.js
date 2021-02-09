@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import classnames from "classnames/dedupe";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 import { Popup, TextField, Button } from "../../../../../../shared";
 import { createRaid } from "../../../../services";
 
@@ -30,6 +31,12 @@ const PopupRaidCreate = (props) => {
       </form>
     </Popup>
   );
+};
+
+PopupRaidCreate.propTypes = {
+  className: PropTypes.string.isRequired,
+  popupConfig: PropTypes.shape({ hide: PropTypes.func.isRequired }),
+
 };
 
 export default PopupRaidCreate;

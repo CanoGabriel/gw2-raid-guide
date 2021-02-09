@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { Redirect, Route } from "react-router-dom";
 import { AuthContext } from "../auth-context/auth-context";
 
@@ -22,6 +23,13 @@ const AuthRoute = (props) => {
   return (
     <Route {...rest} path={path} render={render} />
   );
+};
+
+AuthRoute.propTypes = {
+  path: PropTypes.string.isRequired,
+  component: PropTypes.node.isRequired,
+  noAnonymous: PropTypes.bool,
+
 };
 
 export default AuthRoute;

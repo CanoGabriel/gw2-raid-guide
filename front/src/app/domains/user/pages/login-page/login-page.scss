@@ -1,9 +1,57 @@
 @import "../../../../shared/style/color.scss";
 
 
-.authentication-page {
+.login-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.login-page__forms {
+  padding: 16px 32px 32px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px -7px rgba(0,0,0,0.6);
+  min-width: 400px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.login-page__nav-link {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  
+  .nav-link__wrapper {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-link__cta {
+    align-self: center;
+    padding: 8px; 
+  }
+
+  .nav-link__cta--active {
+    border-bottom: 2px solid var(--blue-main)
+  }
+}
+
+.login-page__form-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .form-content__active-tab {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login-page__signin, .login-page__signup {
+    flex-grow: 1;
+  }
 }

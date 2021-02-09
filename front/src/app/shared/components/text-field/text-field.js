@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef } from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames/dedupe";
 import "./text-field.scss";
 
@@ -39,6 +40,25 @@ const TextField = (props) => {
       {children}
     </div>
   );
+};
+
+TextField.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  value: PropTypes.any.isRequired,
+  readOnly: PropTypes.bool,
+  invalid: PropTypes.bool,
+  disabled: PropTypes.bool,
+  handleFocus: PropTypes.func,
+  handleBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  inputClassName: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  className: PropTypes.string,
+  helperText: PropTypes.string,
+  children: PropTypes.oneOfType(PropTypes.arrayOf(PropTypes.node), PropTypes.node),
+
 };
 
 export default TextField;

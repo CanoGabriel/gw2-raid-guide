@@ -48,13 +48,13 @@ const ViewLink = (props) => {
 ViewLink.propTypes = {
   className: PropTypes.string,
   raidId: PropTypes.string.isRequired,
-  section: PropTypes.exact({ title: PropTypes.string.isRequired }).isRequired,
+  link: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    section: PropTypes.string.isRequired,
+    target: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
   onChange: PropTypes.func,
-};
-
-ViewLink.defaultProps = {
-  className: "",
-  onChange: () => {},
 };
 
 export default ViewLink;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames/dedupe";
 import { Button, Radio } from "../../../../shared";
 import ImageLoader from "../image-loader/image-loader";
@@ -85,6 +86,16 @@ const ImageSelector = (props) => {
       </Button>
     </div>
   );
+};
+
+ImageSelector.propTypes = {
+  className: PropTypes.string,
+  imageType: PropTypes.string.isRequired,
+  onConfirm: PropTypes.func,
+  initialValue: PropTypes.exact({
+    type: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
+  }),
 };
 
 export default ImageSelector;

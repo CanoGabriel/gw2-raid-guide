@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames/dedupe";
 import { AuthContext } from "../../../../components/auth-context/auth-context";
 import { Button } from "../../../../../../shared";
@@ -12,7 +13,11 @@ const GuestLoginButton = (props) => {
   };
   const label = "Continuer en tant qu'invité";
 
-  return <Button className={classnames("guest-login-button", className)} onClick={handleClick}>{label}</Button>;
+  return <Button className={classnames("guest-login-button", className)} onClick={handleClick} outline>{label}</Button>;
+};
+
+GuestLoginButton.propTypes = {
+  className: PropTypes.string,
 };
 
 export default GuestLoginButton;

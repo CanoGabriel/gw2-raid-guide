@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import "./field-wrapper.scss";
 
@@ -13,6 +14,12 @@ const FieldWrapper = (props) => {
       {field}
     </div>
   );
+};
+
+FieldWrapper.propTypes = {
+  className: PropTypes.string,
+  field: PropTypes.node,
+  title: PropTypes.string,
 };
 
 export default FieldWrapper;

@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 const TabContent = (props) => {
   const {
-    tabNavConfig, className, activeClassName, children, id,
+    tabNavConfig, className = "", activeClassName = "", children, id,
   } = props;
 
   const active = tabNavConfig?.activeTab === id;
@@ -29,11 +29,7 @@ TabContent.propTypes = {
     activeTab: PropTypes.bool.isRequired,
   }).isRequired,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
-
-TabContent.defaultProps = {
-  className: "",
-  activeClassName: "",
+  children: PropTypes.oneOfType(PropTypes.arrayOf(PropTypes.node), PropTypes.node),
 };
 
 export default TabContent;

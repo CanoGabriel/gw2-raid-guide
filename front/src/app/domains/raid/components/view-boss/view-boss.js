@@ -66,16 +66,18 @@ ViewBoss.propTypes = {
   raidId: PropTypes.string.isRequired,
   boss: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    image: PropTypes.exact({ type: PropTypes.string.isRequired, key: PropTypes.string.isRequired }),
+    health: PropTypes.string,
+    breakBar: PropTypes.string,
+    addBreakBar: PropTypes.string,
+    hitboxSize: PropTypes.string,
+    armor: PropTypes.string,
+    timer: PropTypes.string,
   }).isRequired,
   className: PropTypes.string,
   onDelete: PropTypes.func,
   onAddSection: PropTypes.func,
-};
-
-ViewBoss.defaultProps = {
-  className: "",
-  onDelete: () => {},
-  onAddSection: () => {},
 };
 
 export default ViewBoss;

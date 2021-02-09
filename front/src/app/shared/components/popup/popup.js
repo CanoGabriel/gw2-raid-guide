@@ -8,7 +8,7 @@ import "./popup.scss";
 
 const Popup = (props) => {
   const {
-    className, popupConfig, title, children,
+    className = "", popupConfig, title, children,
   } = props;
   return (
     <PopupPortal visible={popupConfig?.visible}>
@@ -33,12 +33,10 @@ Popup.propTypes = {
   className: PropTypes.string,
   popupConfig: PropTypes.shape({
     visible: PropTypes.bool.isRequired,
+    hide: PropTypes.func,
   }).isRequired,
   title: PropTypes.string.isRequired,
-};
-
-Popup.defaultProps = {
-  className: "",
+  children: PropTypes.oneOfType(PropTypes.arrayOf(PropTypes.node), PropTypes.node),
 };
 
 export default Popup;

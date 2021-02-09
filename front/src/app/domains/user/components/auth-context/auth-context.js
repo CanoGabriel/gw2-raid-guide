@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import {
-  loginWithEmailAndPassword, loginAnonymously, getCurrentUser,
+  loginWithEmailAndPassword, loginAnonymously, getCurrentUser, signupEmail,
 } from "../../user.service";
 import { getAuthToken, saveAuthToken } from "../../../../configuration";
 
@@ -37,6 +38,14 @@ const AuthProvider = (props) => {
     history.push("/");
   };
 
+  const handleSignupEmail = async (email, password) => {
+    const signupResponse = await signupEmail(email, password);
+    const { token } = signupResponse?.data || {};
+    saveAuthToken(token);
+    await getUser();
+    history.push("/");
+  };
+
   const handleLogout = () => {
     localStorage.clear();
     setUser(false);
@@ -58,11 +67,19 @@ const AuthProvider = (props) => {
 
   return (
     <AuthContext.Provider value={{
-      user, handleAnonymously, handleLoginWithEmail, handleLogout, isSignedIn, isAnonymous, isAuthLoading,
+      user, handleAnonymously, handleLoginWithEmail, handleLogout, isSignedIn, isAnonymous, isAuthLoading, handleSignupEmail,
     }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
+AuthProvider.propTypes = {
+  children: PropTypes.oneOfType(
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ),
+};
+
 export { AuthContext, AuthProvider };

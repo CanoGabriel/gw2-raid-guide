@@ -5,7 +5,7 @@ import "./text-input.scss";
 
 const TextInput = (props) => {
   const {
-    value, name, className, hasError, onChange, placeholder, disabled,
+    value, name, className, hasError, onChange, placeholder, disabled, password,
   } = props;
 
   const handleChange = (event) => {
@@ -15,7 +15,7 @@ const TextInput = (props) => {
   return (
     <input
       className={classnames("text-input", { "text-input--error": hasError, "text-input--disabled": disabled }, className)}
-      type="text"
+      type={password ? "password" : "text"}
       name={name}
       value={value}
       onChange={handleChange}
@@ -32,6 +32,7 @@ TextInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
+  password: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -40,6 +41,7 @@ TextInput.defaultProps = {
   hasError: false,
   placeholder: "",
   disabled: false,
+  password: false,
 };
 
 export default TextInput;

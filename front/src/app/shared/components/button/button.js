@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames/dedupe";
 import "./button.scss";
 
@@ -12,6 +13,14 @@ const Button = (props) => {
       {children}
     </button>
   );
+};
+
+Button.propTypes = {
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  outline: PropTypes.bool,
+  children: PropTypes.oneOfType(PropTypes.arrayOf(PropTypes.node), PropTypes.node),
 };
 
 export default Button;

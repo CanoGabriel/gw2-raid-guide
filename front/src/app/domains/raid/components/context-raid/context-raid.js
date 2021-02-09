@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { fetchRaidById } from "../../services";
 
@@ -24,7 +25,7 @@ const RaidContextProvider = ({ children }) => {
   const {
     boss: bosses = [], section: sections = [], sectionLink: links = [], ...raid
   } = data;
-  console.log(raidId);
+
   return (
     <RaidContext.Provider value={{
       raidId, raid, bosses, sections, links, handleFetchRaid,
@@ -33,6 +34,13 @@ const RaidContextProvider = ({ children }) => {
       {children}
     </RaidContext.Provider>
   );
+};
+
+RaidContextProvider.propTypes = {
+  children: PropTypes.oneOfType(
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ),
 };
 
 const RaidContextConsumer = RaidContext.Consumer;

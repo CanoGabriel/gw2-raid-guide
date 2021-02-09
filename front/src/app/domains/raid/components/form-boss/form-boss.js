@@ -35,7 +35,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(name) => handleFormChange("name", name)}
-          className="form-boss__hitbox-size"
+          className="form-boss__name"
           name="name"
           value={getFieldValue("name")}
           hasError={formError?.name}
@@ -61,7 +61,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(health) => handleFormChange("health", health)}
-          className="form-boss__hitbox-size"
+          className="form-boss__breakBar"
           name="health"
           value={getFieldValue("health")}
           hasError={formError?.health}
@@ -74,7 +74,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(breakBar) => handleFormChange("breakBar", breakBar)}
-          className="form-boss__hitbox-size"
+          className="form-boss__breakBar"
           name="breakBar"
           value={getFieldValue("breakBar")}
           hasError={formError?.breakBar}
@@ -87,7 +87,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(timer) => handleFormChange("timer", timer)}
-          className="form-boss__hitbox-size"
+          className="form-boss__timer"
           name="timer"
           value={getFieldValue("timer")}
           hasError={formError?.timer}
@@ -100,7 +100,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(armor) => handleFormChange("armor", armor)}
-          className="form-boss__hitbox-size"
+          className="form-boss__armor"
           name="armor"
           value={getFieldValue("armor")}
           hasError={formError?.armor}
@@ -113,7 +113,7 @@ const FormBoss = (props) => {
       field: (
         <TextInput
           onChange={(addBreakBar) => handleFormChange("addBreakBar", addBreakBar)}
-          className="form-boss__hitbox-size"
+          className="form-boss__add-breakbar"
           name="addBreakBar"
           value={getFieldValue("addBreakBar")}
           hasError={formError?.addBreakBar}

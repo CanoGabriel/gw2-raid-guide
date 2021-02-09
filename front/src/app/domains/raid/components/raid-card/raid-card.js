@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import { ImageLoader } from "../../../image";
 import "./raid-card.scss";
@@ -22,6 +23,18 @@ const RaidCard = (props) => {
       </ul>
     </div>
   );
+};
+
+RaidCard.propTypes = {
+  raid: PropTypes.shape({
+    name: PropTypes.string,
+    boss: PropTypes.arrayOf(
+      PropTypes.shape({
+        image: PropTypes.exact({ type: PropTypes.string.isRequired, key: PropTypes.string.isRequired }),
+      }),
+    ),
+  }).isRequired,
+  className: PropTypes.string,
 };
 
 export default RaidCard;

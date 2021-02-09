@@ -5,7 +5,7 @@ import "./tab-nav.scss";
 
 const TabNav = (props) => {
   const {
-    id, children, onClick, className, activeClassName, disabled,
+    id, children, onClick = () => {}, className = "", activeClassName = "", disabled = false,
     tabNavConfig,
   } = props;
 
@@ -45,13 +45,7 @@ TabNav.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-};
-
-TabNav.defaultProps = {
-  className: "",
-  activeClassName: "",
-  onClick: () => {},
-  disabled: false,
+  children: PropTypes.oneOfType(PropTypes.arrayOf(PropTypes.node), PropTypes.node),
 };
 
 export default TabNav;

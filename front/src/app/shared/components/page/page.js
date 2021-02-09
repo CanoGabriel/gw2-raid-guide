@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames/dedupe";
 import Header from "../header/header";
 import "./page.scss";
@@ -27,6 +28,12 @@ const Page = (props) => {
       </div>
     </div>
   );
+};
+
+Page.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.oneOfType(PropTypes.arrayOf(PropTypes.node), PropTypes.node),
+  showHeader: PropTypes.bool,
 };
 
 export default Page;

@@ -13,7 +13,7 @@ import "./view-section.scss";
 
 const ViewSection = (props) => {
   const {
-    className, raidId, bossId, section, onChange,
+    className = "", raidId, bossId, section, onChange = () => {},
   } = props;
 
   const { isAnonymous } = useContext(AuthContext);
@@ -74,12 +74,11 @@ ViewSection.propTypes = {
   className: PropTypes.string,
   raidId: PropTypes.string.isRequired,
   onChange: PropTypes.func,
-  section: PropTypes.exact({ title: PropTypes.string.isRequired }).isRequired,
-};
-
-ViewSection.defaultProps = {
-  className: "",
-  onChange: () => {},
+  section: PropTypes.exact({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }).isRequired,
+  bossId: PropTypes.string.isRequired,
 };
 
 export default ViewSection;

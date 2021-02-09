@@ -1,12 +1,11 @@
 import React from "react";
-// import { usePopup } from "../../shared";
-// import PopupCreate from "../../domains/image/components/popup-image-selector/popup-image-selector";
+import SignupForm from "../../domains/user/pages/login-page/components/signup-form/signup-form";
+import LoginForm from "../../domains/user/pages/login-page/components/login-form/login-form";
 
 const Test = () => (
   <main>
-    {/* <FormSection onSubmit={(data) => console.log(data)} onValidate={() => ({})} /> */}
-    {/* <FormBoss onSubmit={(data) => console.log(data)} onValidate={() => ({})} /> */}
-    {/* <FormLink onSubmit={(data) => console.log(data)} onValidate={() => ({})} /> */}
+    <SignupForm onSubmit={(signupData) => console.log(signupData)} />
+    <LoginForm />
   </main>
 );
 export default Test;

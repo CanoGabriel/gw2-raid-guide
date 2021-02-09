@@ -4,6 +4,15 @@ const { firebaseAuth } = require("../../../infrastructure/firebase");
 
 // Firebase token expire after 1h
 
+const signupEmailPassword = async (email, password) => {
+  try {
+    const createdUserCredential = await firebaseAuth().createUserWithEmailAndPassword({ email, password });
+    await createdUserCredential.user.sendEmailVerification();
+  } catch (error) {
+    throw APIError("internal_server_error");
+  }
+};
+
 const loginWithEmailAndPassword = async (email, password) => {
   try {
     const firebaseAuthUser = await firebaseAuth().signInWithEmailAndPassword(email, password);
@@ -45,5 +54,5 @@ const getCurrentUser = (user) => user;
 const logout = async () => ({ success: true });
 
 module.exports = {
-  loginAnonymously, loginWithEmailAndPassword, loginFromToken, logout, upgradeAnonymousWithEmailAndPassword, getCurrentUser,
+  signupEmailPassword, loginAnonymously, loginWithEmailAndPassword, loginFromToken, logout, upgradeAnonymousWithEmailAndPassword, getCurrentUser,
 };
